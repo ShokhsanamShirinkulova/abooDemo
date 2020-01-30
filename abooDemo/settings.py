@@ -31,7 +31,7 @@ SECRET_KEY = '^hb@syad4y+^(1sqyucva15lol=ybgjdo*r5jlmq4lrw@2f!=c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'aboodemo.abootest.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'safe-sands-63867.herokuapp.com']
 
 # Application definition
 
