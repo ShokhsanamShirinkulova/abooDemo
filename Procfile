@@ -1,0 +1,1 @@
+web: gunicorn abooDemo.wsgi --log-file -
