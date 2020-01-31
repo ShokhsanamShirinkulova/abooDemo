@@ -79,8 +79,7 @@ WSGI_APPLICATION = 'abooDemo.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://popwkxxvuuyiyk:8c97d57b68e934714cc1183d76c68a7f16f7c0281522a0fdef54310bd218dfab@ec2-54'
-                '-225-242-183.compute-1.amazonaws.com:5432/d9jdj8jnt3i4au'
+        default='postgres://czfdnyzirsgxep:05a85443d368ad7b9c2006b20dc772084fa78a9c1db9635fd8baa0a78f745790@ec2-52-45-75-24.compute-1.amazonaws.com:5432/dj9sdp36iej67'
     )
 }
 DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
