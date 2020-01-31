@@ -11,16 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from django.core.wsgi import get_wsgi_application
-from whitenoise.django import DjangoWhiteNoise
+import django_heroku
 import dj_database_url
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "abooDemo.settings")
-
-application = get_wsgi_application()
-application = DjangoWhiteNoise(application)
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -31,7 +26,8 @@ SECRET_KEY = '^hb@syad4y+^(1sqyucva15lol=ybgjdo*r5jlmq4lrw@2f!=c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'safe-sands-63867.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'abootest.herokuapp.com']
+
 
 # Application definition
 
@@ -43,12 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ebooks',
-    'rest_framework',
-    'whitenoise.runserver_nostatic'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,18 +72,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'abooDemo.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'abooDemo',
-        'USER': 'postgres',
-        'PASSWORD': '0236',
-        'HOST': 'localhost'
-    }
-}
+DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=dj_database_url.config('postgres://popwkxxvuuyiyk:8c97d57b68e934714cc1183d76c68a7f16f7c0281522a0fdef54310bd218dfab@ec2-54-225-242-183.compute-1.amazonaws.com:5432/d9jdj8jnt3i4au')
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -109,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -122,22 +115,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-STATICFILES_STORAGE = 'whitenoise.django.CompressedManifestStaticFilesStorage'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
 
-prod_db = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(prod_db)
+# Activate Django-Heroku.
+django_heroku.settings(locals())

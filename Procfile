@@ -1,1 +1,1 @@
-web: gunicorn abooDemo.wsgi --log-file -
+web: gunicorn abooDemo.wsgi

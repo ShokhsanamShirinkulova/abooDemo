@@ -11,3 +11,5 @@ class AbooMain(models.Model):
 # Retrieve / Fetch => Get
 # Update / Edit  => Put
 # Delete / Remove  => Delete
+    def __set__(self, instance, value):
+        return self.title
